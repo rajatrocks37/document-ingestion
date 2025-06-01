@@ -1,0 +1,54 @@
+services:
+  postgres:
+    image: postgres:15
+    container_name: postgres
+    environment:
+      POSTGRES_DB: mydb
+      POSTGRES_USER: dev
+      POSTGRES_PASSWORD: dev
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  authservice:
+    build:
+      context: ./authservice
+      dockerfile: Dockerfile
+    image: authservice:latest
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/mydb
+      SPRING_DATASOURCE_USERNAME: dev
+      SPRING_DATASOURCE_PASSWORD: dev
+    ports:
+      - "9000:9000"
+    depends_on:
+      - postgres
+
+  documentmanagement:
+    build:
+      context: ./documentmanagement
+      dockerfile: Dockerfile
+    image: documentmanagement:latest
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/mydb
+      SPRING_DATASOURCE_USERNAME: dev
+      SPRING_DATASOURCE_PASSWORD: dev
+    ports:
+      - "9001:9001"
+    depends_on:
+      - postgres
+
+  frontend:
+    build:
+      context: ./doc-portal-fe
+      dockerfile: Dockerfile
+    image: doc-portal-fe:latest
+    ports:
+      - "4200:80"
+    depends_on:
+      - authservice
+      - documentmanagement
+
+volumes:
+  pgdata:
