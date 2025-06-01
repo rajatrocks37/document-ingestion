@@ -32,7 +32,6 @@ public class JwtService {
 
 	public JwtService(ResourceLoader resourceLoader) throws Exception {
 		this.resourceLoader = resourceLoader;
-		//this.privateKey = loadPrivateKey();
 	}
 
 	@PostConstruct
@@ -55,22 +54,6 @@ public class JwtService {
 	public PrivateKey getPrivateKey() {
 		return this.privateKey;
 	}
-
-//	private PrivateKey loadPrivateKey() throws Exception {
-//		System.out.println("PrivateKeyPath is " + privateKeyPath);
-//		try (InputStream is = getClass().getClassLoader().getResourceAsStream(privateKeyPath)) {
-//			if (is == null) {
-//				throw new FileNotFoundException("Private key not found in classpath");
-//			}
-//			String key = new String(is.readAllBytes(), StandardCharsets.UTF_8);
-//			key = key.replace("-----BEGIN PRIVATE KEY-----", "").replace("-----END PRIVATE KEY-----", "")
-//					.replaceAll("\\s", "");
-//			byte[] keyBytes = Base64.getDecoder().decode(key);
-//			PKCS8EncodedKeySpec spec = new PKCS8EncodedKeySpec(keyBytes);
-//			KeyFactory kf = KeyFactory.getInstance("RSA");
-//			return kf.generatePrivate(spec);
-//		}
-//	}
 
 	public String generateToken(String username, Role role) {
 		return Jwts.builder().setSubject(username).setIssuedAt(new Date())

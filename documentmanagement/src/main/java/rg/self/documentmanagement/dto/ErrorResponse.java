@@ -20,20 +20,17 @@ public class ErrorResponse {
 	private String path;
 	private LocalDateTime timestamp;
 
-	// Constructor for simple message
 	public ErrorResponse(String message) {
 		this.message = message;
 		this.timestamp = LocalDateTime.now();
 	}
 
-	// Constructor with message and status
 	public ErrorResponse(String message, Integer status) {
 		this.message = message;
 		this.status = status;
 		this.timestamp = LocalDateTime.now();
 	}
 
-	// Constructor with all error details
 	public ErrorResponse(String message, String error, Integer status, String path) {
 		this.message = message;
 		this.error = error;

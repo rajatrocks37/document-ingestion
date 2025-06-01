@@ -2,7 +2,6 @@ package rg.self.documentmanagement.controller;
 
 import java.io.IOException;
 import java.security.Principal;
-import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
@@ -42,11 +41,6 @@ public class DocumentController {
 	@Autowired
 	private DocumentService documentService;
 
-//	@GetMapping
-//	public List<Document> getAllDocuments() {
-//		return documentService.getAllDocuments();
-//	}
-
 	@GetMapping
 	@Operation(summary = "Search uploaded documents")
 	public Page<Document> searchDocuments(@RequestParam Optional<String> title, @RequestParam Optional<String> type,
@@ -74,9 +68,9 @@ public class DocumentController {
 
 		return documentService.deleteDocumentAsync(id, deletedBy).thenApply(deleted -> {
 			if (deleted) {
-				return ResponseEntity.noContent().build(); // 204 No Content
+				return ResponseEntity.noContent().build();
 			} else {
-				return ResponseEntity.notFound().build(); // 404 Not Found
+				return ResponseEntity.notFound().build();
 			}
 		}).exceptionally(ex -> {
 			log.error("Error deleting document with id: " + id, ex);

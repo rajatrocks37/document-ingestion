@@ -1,6 +1,6 @@
 -- src/main/resources/data.sql
 
--- Insert a default user with encrypted password (see note below)
+-- Insert a default user with encrypted password
 INSERT INTO USERS (username, password, role, enabled)
 VALUES (
     'admin',
@@ -8,4 +8,4 @@ VALUES (
     'ADMIN',
     true
 )
-ON CONFLICT (username) DO NOTHING; -- Avoid duplicate inserts
+ON CONFLICT (username) DO NOTHING;

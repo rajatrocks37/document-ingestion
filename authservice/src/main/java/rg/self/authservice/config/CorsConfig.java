@@ -15,13 +15,13 @@ public class CorsConfig {
 	public CorsConfigurationSource corsConfigurationSource() {
 		CorsConfiguration config = new CorsConfiguration();
 		config.setAllowCredentials(true); // Allows cookies, Authorization headers, etc.
-		config.setAllowedOrigins(List.of("http://localhost:4200")); // Change for your frontend URL
+		config.setAllowedOrigins(List.of("http://localhost:4200"));
 		config.setAllowedHeaders(List.of("*"));
 		config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
 		config.setExposedHeaders(List.of("Authorization"));
 
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-		source.registerCorsConfiguration("/**", config); // Applies to all endpoints
+		source.registerCorsConfiguration("/**", config);
 		return source;
 	}
 }
