@@ -23,7 +23,7 @@ This project is a microservices-based document ingestion platform with a keyword
 - **Backend:** Spring Boot 2, Java 17 & 21
 - **Authentication:** Spring Security, Spring Authorization Server, JWT
 - **Database:** PostgreSQL
-- **Search:** Full-text search with `ILIKE` and `to_tsvector`/`plainto_tsquery`
+- **Search:** Full-text search with `to_tsvector`/`plainto_tsquery`
 - **Containerization:** Docker, Docker Compose
 - **Build Tools:** Maven
   
