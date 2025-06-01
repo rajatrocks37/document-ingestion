@@ -2,31 +2,6 @@
 
 This project is a microservices-based document ingestion platform with a keyword-based Q&A interface. It includes an Angular 17 frontend, Spring Boot microservices (Auth Server, Document Service), PostgreSQL databases, and Dockerized deployment.
 
-## 🧱 Architecture Overview
-
-      +--------------------+
-      |     Angular App    |
-      +--------------------+
-                |
- +--------------+--------------+
- |                             |
-+------------+ +------------------+
-| Auth Server| | Document Service |
-| (Spring 2, | | (Spring 2) |
-| Java 17) | | Java 21 |
-+------------+ +------------------+
-| |
-| +------------+
-| | PostgreSQL |
-| +------------+
-|
-+------------+
-| PostgreSQL |
-+------------+
-
-
-
-
 ---
 
 ## 🚀 Features
@@ -51,19 +26,7 @@ This project is a microservices-based document ingestion platform with a keyword
 - **Search:** Full-text search with `ILIKE` and `to_tsvector`/`plainto_tsquery`
 - **Containerization:** Docker, Docker Compose
 - **Build Tools:** Maven
-
----
-
-## 📁 Project Structure
-
-├── docker-compose.yml
-├── README.md
-├── auth-service/ (Spring Boot - Java 17)
-├── doc-service/ (Spring Boot - Java 21)
-├── frontend/ (Angular 17)
-
-
-
+  
 ---
 
 ## 🛠️ Getting Started
@@ -71,7 +34,7 @@ This project is a microservices-based document ingestion platform with a keyword
 ### 📦 Prerequisites
 
 - Docker & Docker Compose
-- Java 17+ (for local build, if needed)
+- Java 17+, Java 21+ (for local build, if needed)
 - Node.js + Angular CLI (for local frontend dev, if needed)
 
 ### 🐳 Running with Docker Compose
@@ -86,7 +49,7 @@ Build and run the Angular app
 
 Build and run both Spring Boot microservices
 
-Set up two PostgreSQL databases
+Set up the PostgreSQL database
 
 
 
@@ -94,7 +57,5 @@ Set up two PostgreSQL databases
 These are auto-inserted on startup via SQL scripts:
 
 Username	Password	Role
-admin	admin123	ADMIN
-editor	editor123	EDITOR
-viewer	viewer123	VIEWER
+admin      admin123	ADMIN
 
