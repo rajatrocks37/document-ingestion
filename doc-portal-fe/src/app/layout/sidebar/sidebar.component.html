@@ -1,0 +1,13 @@
+<aside [ngClass]="{'w-16': collapsed, 'w-64': !collapsed}" class="bg-white border-r h-full transition-all duration-300">
+  <nav class="p-4">
+    <ul>
+      <li *ngFor="let item of filteredMenuItems" class="mb-2">
+        <a [routerLink]="item.route"
+           routerLinkActive="font-semibold text-blue-600"
+           class="block px-2 py-2 rounded hover:bg-blue-100 text-gray-700 text-sm">
+          {{ item.label }}
+        </a>
+      </li>
+    </ul>
+  </nav>
+</aside>

@@ -1,0 +1,67 @@
+<div class="max-w-4xl mx-auto mt-10 p-6 bg-white shadow rounded">
+  <h2 class="text-2xl font-bold mb-6">User Management</h2>
+
+  <!-- User Creation Form -->
+  <form (ngSubmit)="createUser()" #userForm="ngForm" class="mb-10">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+      <input
+        type="text"
+        name="username"
+        [(ngModel)]="newUser.username"
+        class="p-2 border rounded"
+        placeholder="Username"
+        required
+      />
+      <input
+        type="password"
+        name="password"
+        [(ngModel)]="newUser.password"
+        class="p-2 border rounded"
+        placeholder="Password"
+        required
+      />
+      <select
+        name="role"
+        [(ngModel)]="newUser.role"
+        class="p-2 border rounded"
+        required
+      >
+        <option value="" disabled selected>Select Role</option>
+        <option *ngFor="let role of roles" [value]="role">{{ role }}</option>
+      </select>
+    </div>
+    <button
+      type="submit"
+      class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700"
+      [disabled]="userForm.invalid"
+    >
+      Create/Update User
+    </button>
+  </form>
+
+  <!-- Users Table -->
+  <h3 class="text-xl font-semibold mb-2">All Users</h3>
+  <table class="w-full table-auto border-collapse">
+    <thead>
+      <tr class="bg-gray-100">
+        <th class="p-2 border">Username</th>
+        <th class="p-2 border">Role</th>
+        <th class="p-2 border text-center">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users()">
+        <td class="p-2 border">{{ user.username }}</td>
+        <td class="p-2 border">{{ user.role }}</td>
+        <td class="p-2 border text-center">
+          <button
+            class="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700"
+            (click)="deleteUser(user.username)"
+          >
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,39 @@
+<div class="max-w-3xl mx-auto mt-10 p-4 bg-white shadow rounded">
+    <h2 class="text-xl font-bold mb-4">Ingestion Management</h2>
+
+    <!-- Trigger ingestion -->
+    <div class="mb-6">
+        <label class="block mb-2 font-medium">Select Document ID to Ingest</label>
+        <input [(ngModel)]="docId" class="w-full border p-2 mb-2" type="number" placeholder="Enter Document ID" />
+        <button (click)="triggerIngestion()" class="bg-blue-600 text-white px-4 py-2 rounded">
+            Start Ingestion
+        </button>
+    </div>
+
+    <!-- Ingestion status table -->
+    <h3 class="text-lg font-semibold mb-2">Ingestion Status</h3>
+    <table class="w-full border-collapse table-auto">
+        <thead>
+            <tr class="bg-gray-100 text-left">
+                <th class="p-2 border">Doc ID</th>
+                <th class="p-2 border">Status</th>
+                <th class="p-2 border">Timestamp</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let status of ingestionStatus()">
+                <td class="p-2 border">{{ status.docId }}</td>
+                <td class="p-2 border">
+                    <span class="px-2 py-1 rounded text-white" [ngClass]="{
+          'bg-green-600': status.status === 'COMPLETED',
+          'bg-yellow-600': status.status === 'IN_PROGRESS',
+          'bg-red-600': status.status === 'FAILED'
+        }">
+                        {{ status.status }}
+                    </span>
+                </td>
+                <td class="p-2 border">{{ status.timestamp }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

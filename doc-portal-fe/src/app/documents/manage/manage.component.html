@@ -1,0 +1,66 @@
+<div class="max-w-6xl mx-auto p-6">
+  <h2 class="text-2xl font-bold mb-6">📁 Manage Documents</h2>
+
+  <!-- Filters -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
+    <input class="input" [(ngModel)]="filters.title" placeholder="Search Title" />
+    <input class="input" [(ngModel)]="filters.type" placeholder="Type (e.g., PDF)" />
+    <input class="input" [(ngModel)]="filters.uploadedBy" placeholder="Uploaded By" />
+    <input type="date" class="input" [(ngModel)]="filters.startDate" />
+    <!-- <input type="date" class="input" [(ngModel)]="filters.endDate" /> -->
+    <!-- <input class="input" [(ngModel)]="filters.keyword" placeholder="Keyword" /> -->
+    <select class="input" [(ngModel)]="sortBy">
+      <option value="">Sort by</option>
+      <option value="title">Title</option>
+      <option value="type">Type</option>
+      <option value="uploadedAt">Uploaded Time</option>
+      <option value="uploadedBy">Uploaded By</option>
+    </select>
+    <select class="input" [(ngModel)]="sortDir">
+      <option value="asc">Asc</option>
+      <option value="desc">Desc</option>
+    </select>
+  </div>
+
+  <div class="mb-4">
+    <button class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700" (click)="applyFilters()">🔍 Search</button>
+    <button class="ml-2 px-4 py-2 border rounded" (click)="resetFilters()">Reset</button>
+  </div>
+
+  <!-- Table -->
+  <div class="overflow-x-auto">
+    <table class="w-full table-auto border-collapse">
+      <thead>
+        <tr class="bg-gray-200">
+          <th class="p-2 border">Title</th>
+          <th class="p-2 border">Type</th>
+          <th class="p-2 border">Uploaded Time</th>
+          <th class="p-2 border">Uploaded By</th>
+          <th class="p-2 border">Keywords</th>
+          <th class="p-2 border">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let doc of documents">
+          <td class="p-2 border">{{ doc.title }}</td>
+          <td class="p-2 border">{{ doc.type }}</td>
+          <td class="p-2 border">{{ doc.uploadedAt | date:'short' }}</td>
+          <td class="p-2 border">{{ doc.uploadedBy }}</td>
+          <td class="p-2 border">{{ doc.keywords.join(', ') }}</td>
+          <td class="p-2 border">
+            <button (click)="deleteDoc(doc.id)" class="text-red-600 hover:underline">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Pagination -->
+  <div class="flex justify-between items-center mt-4">
+    <div>Page {{ currentPage + 1 }} of {{ totalPages }}</div>
+    <div class="space-x-2">
+      <button [disabled]="currentPage === 0" (click)="goToPage(currentPage - 1)" class="btn">⟨ Prev</button>
+      <button [disabled]="currentPage + 1 >= totalPages" (click)="goToPage(currentPage + 1)" class="btn">Next ⟩</button>
+    </div>
+  </div>
+</div>

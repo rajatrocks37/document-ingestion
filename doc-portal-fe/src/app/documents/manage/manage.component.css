@@ -1,0 +1,43 @@
+.input {
+    width: 100%;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+
+    .btn-primary {
+        background-color: #2563EB;
+        color: #fff;
+        padding-left: 1rem;
+
+        .btn-outline {
+            padding-left: 1rem;
+            padding-right: 1rem;
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+            border: 1px solid #9CA3AF;
+            border-radius: 0.25rem;
+            color: #374151;
+            background: transparent;
+            transition: background-color 0.2s;
+        }
+
+        .btn-outline:hover {
+            background-color: #F3F4F6;
+        }
+
+        border-radius: 0.25rem;
+        transition: background-color 0.2s;
+    }
+
+    .btn-primary:hover {
+        background-color: #1D4ED8;
+    }
+
+    border-radius: 0.25rem;
+    outline: none;
+}
+
+.input:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px #60A5FA;
+    border-color: #60A5FA;
+}

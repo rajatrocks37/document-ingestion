@@ -1,0 +1,11 @@
+<header class="bg-blue-700 text-white px-6 py-4 flex justify-between items-center shadow">
+  <div class="flex items-center gap-4">
+    <button (click)="toggleSidebar.emit()" class="text-white text-xl">&#9776;</button>
+    <h1 class="text-xl font-bold">DocIngest Q&A Platform</h1>
+  </div>
+  <div>
+    <span class="text-sm mr-4">Welcome, {{auth.getCurrentUser()?.username }}</span>
+    <!-- Display username here auth.username()-->
+    <button (click)="logout()" class="bg-red-600 px-3 py-1 rounded hover:bg-red-700">Logout</button>
+  </div>
+</header>
