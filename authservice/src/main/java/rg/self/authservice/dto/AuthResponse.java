@@ -1,13 +1,11 @@
 package rg.self.authservice.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import rg.self.authservice.entity.Users.Role;
+import rg.self.authservice.entity.User.Role;
 
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class AuthResponse {

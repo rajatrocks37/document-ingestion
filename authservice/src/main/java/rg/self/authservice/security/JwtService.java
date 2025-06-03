@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import jakarta.annotation.PostConstruct;
-import rg.self.authservice.entity.Users.Role;
+import rg.self.authservice.entity.User.Role;
 
 @Service
 public class JwtService {

@@ -9,7 +9,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
-import rg.self.authservice.entity.Users;
+import rg.self.authservice.entity.User;
 import rg.self.authservice.repository.UserRepository;
 
 @Service
@@ -24,12 +24,12 @@ public class CustomUserDetailsService implements UserDetailsService {
 		return userRepo.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("User not found"));
 	}
 
-	public List<Users> getAllUsers() {
+	public List<User> getAllUsers() {
 		return userRepo.findAll();
 	}
 
 	public void deleteUser(String username) {
-		Users user = userRepo.findByUsername(username)
+		User user = userRepo.findByUsername(username)
 				.orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
 		userRepo.delete(user);

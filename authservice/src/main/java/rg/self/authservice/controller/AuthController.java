@@ -1,8 +1,7 @@
 package rg.self.authservice.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,31 +10,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import rg.self.authservice.dto.AuthResponse;
-import rg.self.authservice.dto.GenericResponse;
 import rg.self.authservice.dto.LoginRequest;
-import rg.self.authservice.dto.RegisterRequest;
+import rg.self.authservice.dto.UserRegistrationRequest;
+import rg.self.authservice.dto.UserRegistrationResponse;
+import rg.self.authservice.entity.User;
 import rg.self.authservice.service.AuthService;
 
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
 
-	@Autowired
-	private AuthService authService;
+	private final AuthService authService;
 
-	@Autowired
-	private AuthenticationManager authManager;
+	public AuthController(AuthService authService) {
+		this.authService = authService;
+	}
 
 	@PostMapping("/register")
-	public ResponseEntity<?> register(@RequestBody RegisterRequest request) {
-		request.setRole(null);
-		authService.register(request);
-		return ResponseEntity.ok(new GenericResponse("User registered successfully"));
+	public ResponseEntity<?> register(@RequestBody UserRegistrationRequest request) {
+		User user = authService.register(request);
+		return ResponseEntity.status(HttpStatus.CREATED)
+				.body(new UserRegistrationResponse(user.getUsername(), "User registered successfully"));
 	}
 
 	@PostMapping("/login")
 	public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest request) {
-		AuthResponse response = authService.login(request.getUsername(), request.getPassword(), authManager);
+		AuthResponse response = authService.login(request);
 		return ResponseEntity.ok(response);
 	}
 

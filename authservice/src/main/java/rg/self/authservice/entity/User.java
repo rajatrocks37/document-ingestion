@@ -11,14 +11,16 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
 @NoArgsConstructor
 @Data
+@AllArgsConstructor
 @Table(name = "users")
-public class Users implements UserDetails {
+public class User implements UserDetails {
 
 	private static final long serialVersionUID = 1L;
 
@@ -32,6 +34,19 @@ public class Users implements UserDetails {
 
 	public enum Role {
 		ADMIN, EDITOR, VIEWER
+	}
+
+	public User(String username, String password) {
+		super();
+		this.username = username;
+		this.password = password;
+	}
+
+	public User(String username, String password, Role role) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.role = role;
 	}
 
 	@Override
@@ -68,4 +83,5 @@ public class Users implements UserDetails {
 	public boolean isEnabled() {
 		return true;
 	}
+
 }

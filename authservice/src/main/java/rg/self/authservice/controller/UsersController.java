@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
 import rg.self.authservice.dto.GenericResponse;
-import rg.self.authservice.dto.RegisterRequest;
+import rg.self.authservice.dto.UserCreationRequest;
 import rg.self.authservice.service.AuthService;
 import rg.self.authservice.service.CustomUserDetailsService;
 
@@ -38,9 +38,9 @@ public class UsersController {
 
 	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping
-	public ResponseEntity<?> createUser(@RequestBody RegisterRequest request) {
+	public ResponseEntity<?> createUser(@RequestBody UserCreationRequest request) {
 		try {
-			authService.register(request);
+			authService.createUser(request);
 			return ResponseEntity.status(HttpStatus.CREATED).body(new GenericResponse("User created successfully"));
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -55,7 +55,7 @@ public class UsersController {
 			userDetailsService.deleteUser(username);
 			return ResponseEntity.noContent().build();
 		} catch (UsernameNotFoundException e) {
-			return ResponseEntity.badRequest().body("Failed to delete user: " + e.getMessage());
+			return ResponseEntity.badRequest().body(new GenericResponse("Failed to delete user: " + e.getMessage()));
 		}
 	}
 }

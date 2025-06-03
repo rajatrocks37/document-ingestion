@@ -4,11 +4,11 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import rg.self.authservice.entity.Users;
+import rg.self.authservice.entity.User;
 
-public interface UserRepository extends JpaRepository<Users, String> {
+public interface UserRepository extends JpaRepository<User, String> {
 
-	Optional<Users> findByUsername(String username);
+	Optional<User> findByUsername(String username);
 
 	void deleteByUsername(String username);
 }
